@@ -1,0 +1,43 @@
+package com.scrap.services;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.scrap.daos.StockDao;
+import com.scrap.pojos.Stock;
+
+@Transactional
+@Service
+public class StockService
+{
+	@Autowired
+	private StockDao stockDao;
+
+// user register
+	public Stock save(Stock stock)
+	{
+		return stockDao.save(stock);
+
+	}
+
+	// decrese the stock qty when sells from stock to subcat table
+	public void decreaseStockQty(int userId, String subCategory, int qtyToDecrease)
+	{
+		List<Stock> list = stockDao.findAll();
+		for (Stock s : list)
+		{
+			if (s.getUserId() == userId && s.getSubcategory().equals(subCategory))
+			{
+				Stock st = s;
+				st.setQty(st.getQty() - qtyToDecrease);
+				stockDao.save(st);
+				break;
+			}
+		}
+
+	}
+	
+}

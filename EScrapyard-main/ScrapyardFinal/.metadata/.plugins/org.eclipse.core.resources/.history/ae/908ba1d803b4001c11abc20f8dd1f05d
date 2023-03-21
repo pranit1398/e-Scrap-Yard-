@@ -1,0 +1,153 @@
+package com.scrap.pojos;
+
+import java.sql.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+@Entity
+@Table(name = "orders")
+public class Order {
+	@Id
+	@Column(name = "orderid")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int orderId;
+	@Column(name = "subcategory")
+	private String subcategory;
+	@Column(name = "rate")
+	private double rate;
+
+	@Column(name = "order_date")
+	private String orderDate;
+
+	@Column(name = "contact_no")
+	private String contactNo;
+	@Column
+	private String state;
+	@Column
+	private String city;
+	@Column
+	private String zipcode;
+	@Column
+	private String address;
+
+	@JsonBackReference
+	@ManyToOne
+	@JoinColumn(name = "user_id")
+	private Register register;
+
+	public Order() {
+		super();
+	}
+
+	public Order(int orderId, String subcategory, double rate, String orderDate, String contactNo, String state,
+			String city, String zipcode, String address, Register register) {
+		super();
+		this.orderId = orderId;
+		this.subcategory = subcategory;
+		this.rate = rate;
+		this.orderDate = orderDate;
+		this.contactNo = contactNo;
+		this.state = state;
+		this.city = city;
+		this.zipcode = zipcode;
+		this.address = address;
+		this.register = register;
+	}
+
+	public int getOrderId() {
+		return orderId;
+	}
+
+	public void setOrderId(int orderId) {
+		this.orderId = orderId;
+	}
+
+	public String getSubcategory() {
+		return subcategory;
+	}
+
+	public void setSubcategory(String subcategory) {
+		this.subcategory = subcategory;
+	}
+
+	public double getRate() {
+		return rate;
+	}
+
+	public void setRate(double rate) {
+		this.rate = rate;
+	}
+
+	public String getOrderDate() {
+		return orderDate;
+	}
+
+	public void setOrderDate(String orderDate) {
+		this.orderDate = orderDate;
+	}
+
+	public String getContactNo() {
+		return contactNo;
+	}
+
+	public void setContactNo(String contactNo) {
+		this.contactNo = contactNo;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getZipcode() {
+		return zipcode;
+	}
+
+	public void setZipcode(String zipcode) {
+		this.zipcode = zipcode;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public Register getRegister() {
+		return register;
+	}
+
+	public void setRegister(Register register) {
+		this.register = register;
+	}
+
+	@Override
+	public String toString() {
+		return "Order [orderId=" + orderId + ", subcategory=" + subcategory + ", rate=" + rate + ", orderDate="
+				+ orderDate + ", contactNo=" + contactNo + ", state=" + state + ", city=" + city + ", zipcode="
+				+ zipcode + ", address=" + address + ", register=" + register + "]";
+	}
+
+}

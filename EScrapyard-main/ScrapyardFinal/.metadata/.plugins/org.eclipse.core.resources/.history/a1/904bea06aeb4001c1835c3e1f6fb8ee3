@@ -1,0 +1,5 @@
+package com.scrap.dtos;
+
+public class SellerDto {
+
+}

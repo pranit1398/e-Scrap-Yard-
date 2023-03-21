@@ -1,0 +1,9 @@
+.dashboard-heading {
+          text-align: center; /* align text to center */
+  font-size: 3rem; /* set font size to 3rem */
+  color: black; /* set text color to black */
+  /* margin-top: 20px; add 20px top margin */
+  border: 1px solid black; /* add a 1px solid black border */
+  padding: 10px; /* add 10px padding around the text */
+      }
+      

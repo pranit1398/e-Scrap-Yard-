@@ -1,0 +1,51 @@
+	package com.scrap.services;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.scrap.daos.OrderDao;
+import com.scrap.daos.RegisterDao;
+import com.scrap.dtos.DtoEntityConvertor;
+import com.scrap.dtos.OrderDto;
+import com.scrap.pojos.Order;
+import com.scrap.pojos.Register;
+
+@Transactional
+@Service
+public class OrderService
+{
+	@Autowired
+	private OrderDao orderDao;
+
+	@Autowired
+	private RegisterDao registerDao;
+
+	
+
+	public int deleteById(int id)
+	{
+		if (orderDao.existsById(id))
+		{
+			orderDao.deleteById(id);
+			return 1;
+		}
+		return 0;
+	}
+
+	public List<Order> findListOfOrder(int id)
+	{
+		Register reg = registerDao.findById(id);
+		
+		return reg.getOrdersList();
+	}
+	public Order placeOrder(OrderDto dto)
+	{
+		Order o = DtoEntityConvertor.toOrderEntity(dto);
+		Order orderToBeAdded = orderDao.save(o);
+		return orderToBeAdded;
+	}
+}
